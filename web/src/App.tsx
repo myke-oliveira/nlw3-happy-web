@@ -2,15 +2,11 @@ import React from 'react';
 
 import './styles/global.css';
 
-interface TitleProps {
-  text: string;
-}
+import Routes from './routes';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Bando de Marombeiros</h1>
-    </div>
+    <Routes />
   );
 }
 
