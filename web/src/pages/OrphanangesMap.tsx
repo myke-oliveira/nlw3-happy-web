@@ -18,7 +18,7 @@ const mapIcon = Leaflet.icon({
 })
 
 function OrphanagesMap() {
-    console.log(`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAP_BOX}`)
+    console.log(`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAP_BOX_TOKEN}`)
     return (
         <div id="page-map">
             <aside>
@@ -48,14 +48,14 @@ function OrphanagesMap() {
                 >
                     <Popup closeButton={false} minWidth={240} maxWidth={240} className="map-popup">
                         lar das meninas
-                        <Link to="">
+                        <Link to="/orphanages/1">
                             <FiArrowRight size={20} color="#fff" />
                         </Link>
                     </Popup>
                 </Marker>
             </Map>
 
-            <Link to="" className="create-orphanage">
+            <Link to="/orphanages/create" className="create-orphanage">
                 <FiPlus size={32} color="#fff" />
             </Link>
         </div>
