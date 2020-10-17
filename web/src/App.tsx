@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './styles/global.css';
+import './styles/pages/orphanage.css';
 
 import Routes from './routes';
 
