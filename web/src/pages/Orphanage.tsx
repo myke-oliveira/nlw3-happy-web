@@ -9,11 +9,10 @@ import '../styles/pages/orphanage.css';
 import mapIcon from '../utils/mapIcon';
 
 export default function Orphanage() {
-
+  
   return (
     <div id="page-orphanage">
       <Sidebar />
-
       <main>
         <div className="orphanage-details">
           <img src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg" alt="Lar das meninas" />
