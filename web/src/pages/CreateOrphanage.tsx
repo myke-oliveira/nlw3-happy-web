@@ -8,7 +8,8 @@ import Sidebar from '../componets/side-bar';
 import '../styles/pages/create-orphanage.css';
 
 import mapIcon from '../utils/mapIcon';
-import Orphanage from "./Orphanage";
+import api from "../services/api";
+import { useHistory } from "react-router-dom";
 
 export default function CreateOrphanage() {
 
@@ -22,6 +23,8 @@ export default function CreateOrphanage() {
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
 
+  const history = useHistory();
+
   function handleMapClick(event:LeafletMouseEvent) {
     const { lat, lng } = event.latlng;
     setPosition({
@@ -31,19 +34,29 @@ export default function CreateOrphanage() {
   }
 
 
-  function handleSubmit(event:FormEvent) {
+  async function handleSubmit(event:FormEvent) {
     event.preventDefault();
 
     const { latitude, longitude } = position;
-    console.log(
-      latitude,
-      longitude,
-      name,
-      about,
-      instructions,
-      opening_hours,
-      open_on_weekends,
-    )
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('latitude', String(latitude));
+    formData.append('longitude', String(longitude));
+    formData.append('about', about);
+    formData.append('instructions', instructions);
+    formData.append('opening_hours', opening_hours);
+    formData.append('open_on_weekends', String(open_on_weekends));
+    images.forEach((image) => {
+      formData.append('images', image)
+    });
+
+    await api.post('orphanages', formData);
+
+    alert('Cadastro realizado com sucesso');
+
+    history.push('/app');
+
   }
 
   function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
@@ -57,6 +70,7 @@ export default function CreateOrphanage() {
     ));
     setPreviewImages(seletedImagesPreview);
   }
+
   return (
     <div id="page-create-orphanage">
       <Sidebar />
@@ -66,7 +80,7 @@ export default function CreateOrphanage() {
             <legend>Dados</legend>
 
             <Map 
-              center={[-27.2092052,-49.6401092]} 
+              center={[-19.9135286,-43.9653568]} 
               style={{ width: '100%', height: 280 }}
               zoom={15}
               onclick={handleMapClick}
